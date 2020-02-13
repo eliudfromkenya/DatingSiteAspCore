@@ -52,10 +52,13 @@ namespace DatingApp.Api.Controllers
     [HttpPost("login")]
     public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
     {
+      if(userForLoginDto==null)
+        return BadRequest("Null request parmeters");
+
       var userRepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
-      if (userForLoginDto == null)
+      if (userRepo == null)
       {
-        return Unauthorized();
+         return Unauthorized();
       }
 
       var claims = new[] {
@@ -80,6 +83,5 @@ namespace DatingApp.Api.Controllers
         token = tokenHandler.WriteToken(token)
       });
     }
-
   }
 }

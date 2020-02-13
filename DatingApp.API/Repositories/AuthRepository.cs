@@ -19,9 +19,8 @@ namespace DatingApp.API.Repositories {
 
             if (!VerifyPasswordHash (password, user.PasswordHash, user.PasswordSalt)) {
                 return null;
-            }
-
-            return user;
+            }     
+      return user;
         }
 
         private bool VerifyPasswordHash (string password, byte[] passwordHash, byte[] passwordSalt) {

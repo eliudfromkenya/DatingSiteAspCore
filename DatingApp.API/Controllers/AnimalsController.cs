@@ -27,6 +27,7 @@ namespace DatingApp.Api.Controllers
 
         // GET: api/<controller>
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
     //   _context.Animals.Add(new Animal { Id = 1, Name = "Simba", DateOfBirth = DateTime.Now });
