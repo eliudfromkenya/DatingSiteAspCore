@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 //using ResponseFormattingSample.Model;
 
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class AnimalsController : ControllerBase
     {
@@ -21,7 +23,6 @@ namespace DatingApp.Api.Controllers
         public AnimalsController(DataContext context)
         {
           _context = context;  
-          _context.Database.EnsureCreated();          
         }
 
         // GET: api/<controller>
@@ -48,6 +49,7 @@ namespace DatingApp.Api.Controllers
 
         // POST api/<controller>
         [HttpPost]
+        [AllowAnonymous]
         public void Post([FromBody]string value)
         {
         }
