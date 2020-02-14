@@ -12,6 +12,7 @@ export class AuthService {
   decodedToken: any;
 
   constructor(private http: HttpClient) {}
+
   login(model: any) {
     console.log(model);
     return this.http.post(this.baseUrl + "login", model).pipe(
@@ -29,6 +30,10 @@ export class AuthService {
     const token = localStorage.getItem("token");
     return !this.jwtHelper.isTokenExpired(token);
   }
+  logout() {
+    localStorage.removeItem("token");
+  }
+
   register(model: any) {
     return this.http.post(this.baseUrl + "register", model);
   }
