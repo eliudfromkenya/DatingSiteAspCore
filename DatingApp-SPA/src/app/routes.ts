@@ -10,6 +10,10 @@ export const appRoutes: Routes = [
     component: HomeComponent
   },
   {
+    path: "home",
+    component: HomeComponent
+  },
+  {
     path: "members",
     component: MemberListComponent,
     canActivate: [AuthGuard]

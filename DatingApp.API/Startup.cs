@@ -4,9 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+//using AutoMapper;
 using DatingApp.Api.Data;
 using DatingApp.Api.Models;
 using DatingApp.API.Contracts;
+using DatingApp.API.Data;
 using DatingApp.API.Helpers;
 using DatingApp.API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -41,7 +44,11 @@ namespace DatingApp.Api
       services.AddDbContext<DataContext>(x => x.UseSqlite(@"Filename=DatingAppDb.db"));
       services.AddControllers();
       services.AddCors();
+      //services.AddAutoMapper();
+      services.AddAutoMapper(typeof(AutoMapperProfiles));
+      services.AddTransient<Seed>();
       services.AddScoped<IAuthRepository, AuthRepository>();
+      services.AddScoped<IRepository, Repository>();
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       .AddJwtBearer(options =>
 {
@@ -56,7 +63,7 @@ namespace DatingApp.Api
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
     {
       if (env.IsDevelopment())
       {
@@ -78,6 +85,14 @@ namespace DatingApp.Api
           });
         });
       }
+      try
+      {
+        Console.WriteLine("writing");
+        seeder.SeedUsers();
+        Console.WriteLine("writing out");
+      }
+      catch (System.Exception)
+      { }
       app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
       app.UseAuthentication();
       app.UseHttpsRedirection();

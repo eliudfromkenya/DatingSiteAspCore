@@ -21,10 +21,11 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(): boolean {
     if (this.authService.loggedIn()) {
-      this.alertify.success("Navigation Accepted");
       return true;
     }
-    this.alertify.error("You shall not pass by back door");
+    this.alertify.error(
+      "Prohibited point - please ensure you have rights or loged in to access the resource"
+    );
     this.router.navigate(["/home"]);
     return false;
   }
