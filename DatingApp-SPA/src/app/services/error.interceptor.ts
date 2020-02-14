@@ -6,7 +6,9 @@ import {
   HttpEvent,
   HttpErrorResponse,
   HTTP_INTERCEPTORS
+  // tslint:disable-next-line: quotemark
 } from "@angular/common/http";
+// tslint:disable-next-line: quotemark
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 @Injectable()
