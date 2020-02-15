@@ -85,14 +85,14 @@ namespace DatingApp.Api
           });
         });
       }
-      try
-      {
-        Console.WriteLine("writing");
-        seeder.SeedUsers();
-        Console.WriteLine("writing out");
-      }
-      catch (System.Exception)
-      { }
+      // try
+      // {
+      //   Console.WriteLine("writing");
+      //   seeder.SeedUsers();
+      //   Console.WriteLine("writing out");
+      // }
+      // catch (System.Exception)
+      // { }
       app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
       app.UseAuthentication();
       app.UseHttpsRedirection();
