@@ -16,7 +16,13 @@ export class UserService {
   }
 
   getUser(userId: number): Observable<User> {
-    console.log("Getting user", userId);
     return this.http.get<User>(this.baseUrl + "/" + userId);
+  }
+
+  updateUser(id: number, user: User) {
+    const url = this.baseUrl + "/" + id;
+    const mm = this.http.put(url, user);
+    console.log("Started", url, mm);
+    return mm;
   }
 }

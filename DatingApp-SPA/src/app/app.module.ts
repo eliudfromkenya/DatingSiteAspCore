@@ -1,3 +1,4 @@
+import { MemberEditComponent } from "./members/member-list/member-edit/member-edit.component";
 import { NgxGalleryModule } from "@nomadreservations/ngx-gallery";
 import { MemberListResolver } from "./resolvers/member-list.resolver";
 import { MemberDetailComponent } from "./members/member-list/member-detail/member-detail.component";
@@ -26,6 +27,8 @@ import { RouterModule } from "@angular/router";
 import { appRoutes } from "./routes";
 import { JwtModule } from "@auth0/angular-jwt";
 import { MemberDetailResolver } from "./resolvers/member-details.resolver";
+import { MemberEditResolver } from "./resolvers/member-edit.resolver";
+import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-guard";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { MemberDetailResolver } from "./resolvers/member-details.resolver";
     ListComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +69,9 @@ import { MemberDetailResolver } from "./resolvers/member-details.resolver";
     ErrorInterceptorProvider,
     UserService,
     MemberDetailResolver,
-    MemberListResolver
+    MemberListResolver,
+    MemberEditResolver,
+    PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]
 })
