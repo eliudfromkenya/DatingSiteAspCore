@@ -19,11 +19,14 @@
       </li>
     </ul>
 
-    <li *ngIf="loggedIn()" class="dropdown mt-3" dropdown>
+    <li *ngIf="loggedIn()" class="dropdown mr-3" dropdown>
+      <span class="mr-1">
+        <img src="{{authService.currentUser.photoURL}}" alt="">
+      </span>
       <a class="nav-link dropdown-toggle text-light" dropdownToggle
         >Welcome {{ authService?.decodedToken?.unique_name }}</a
       >
-      <div class="dropdown-menu" aria-labelledby="dropdown01" *dropdownMenu>
+      <div class="dropdown-menu mt-3" aria-labelledby="dropdown01" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/member/edit']"
           ><i class="fa fa-user"></i>Edit Profile</a
         >

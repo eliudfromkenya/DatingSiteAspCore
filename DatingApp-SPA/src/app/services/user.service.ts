@@ -21,8 +21,18 @@ export class UserService {
 
   updateUser(id: number, user: User) {
     const url = this.baseUrl + "/" + id;
-    const mm = this.http.put(url, user);
-    console.log("Started", url, mm);
-    return mm;
+    return this.http.put(url, user);
+  }
+
+  setMainPhoto(userId: number, id: number) {
+    return this.http.post(this.baseUrl + '/' + userId + '/photos/' + id + '/setMain', {});
+  }
+
+  deletePhoto(userId: number, id: number) {
+    return this.http.delete(this.baseUrl + '/' + userId + '/photos/' + id);
+  }
+
+  sendLike(id: number, recipientId: number) {
+    return this.http.post(this.baseUrl + '/' + id + '/like/' + recipientId, {});
   }
 }

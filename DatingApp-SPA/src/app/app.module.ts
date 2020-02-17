@@ -1,3 +1,5 @@
+import { FileUploadModule } from "ng2-file-upload";
+import { PhotoEditorComponent } from "./members/member-list/photo-editor/photo-editor.component";
 import { MemberEditComponent } from "./members/member-list/member-edit/member-edit.component";
 import { NgxGalleryModule } from "@nomadreservations/ngx-gallery";
 import { MemberListResolver } from "./resolvers/member-list.resolver";
@@ -41,7 +43,8 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     RouterModule.forRoot(appRoutes),
     TabsModule.forRoot(),
     NgxGalleryModule,
+    FileUploadModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: function tokenGetter() {
