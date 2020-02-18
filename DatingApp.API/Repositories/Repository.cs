@@ -28,8 +28,9 @@ namespace DatingApp.API.Repositories {
 
     public async Task<User> GetUser (int userId) {
       Console.Write (userId);
-      return await _context.Users.Include (p => p.Photos).FirstOrDefaultAsync (x => x.Id == userId);
+      return await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync (x => x.Id == userId);
     }
+
    public async Task<Photo> GetMainPhotoForUser(int userId)
         {
             return await _context.Photos.Where(u => u.UserId == userId)
@@ -38,7 +39,7 @@ namespace DatingApp.API.Repositories {
 
   public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var query = _context.Users.AsQueryable();
+            var query = _context.Users.Include(x => x.Photos).AsQueryable();
 
             if (isCurrentUser)
                 query = query.IgnoreQueryFilters();

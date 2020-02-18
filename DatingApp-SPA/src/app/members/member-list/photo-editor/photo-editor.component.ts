@@ -4,8 +4,8 @@ import { Input, Output, EventEmitter } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { Photo } from "src/app/models/Photo";
 import { FileUploader } from "ng2-file-upload";
-import { UserService } from 'src/app/services/user.service';
-import { AlertifyService } from 'src/app/services/alertify.service';
+import { UserService } from "src/app/services/user.service";
+import { AlertifyService } from "src/app/services/alertify.service";
 
 @Component({
   selector: "app-photo-editor",
@@ -21,8 +21,11 @@ export class PhotoEditorComponent implements OnInit {
   baseUrl: string = environment.apiUrl + "/";
   currentMain: Photo;
 
-  constructor(private authService: AuthService, private userService: UserService,
-    private alertify: AlertifyService) {
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private alertify: AlertifyService
+  ) {
     this.hasBaseDropZoneOver = false;
   }
 
@@ -64,26 +67,55 @@ export class PhotoEditorComponent implements OnInit {
         };
         this.photos.push(photo);
         if (photo.isMain) {
-          //  this.authService.changeMemberPhoto(photo.url);
-          //   this.authService.currentUser.photoUrl = photo.url;
-          // localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoURL = photo.url;
+          localStorage.setItem(
+            "user",
+            JSON.stringify(this.authService.currentUser)
+          );
         }
       }
     };
   }
 
-
   setMainPhoto(photo: Photo) {
-    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
-      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
-      this.currentMain.isMain = false;
-      photo.isMain = true;
-      //this.authService.changeMemberPhoto(photo.url);
-      //this.authService.currentUser.photoUrl = photo.url;
-      //localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
-    }, error => {
-      this.alertify.error(error);
+    this.userService
+      .setMainPhoto(this.authService.decodedToken.nameid, photo.id)
+      .subscribe(
+        () => {
+          this.currentMain = this.photos.filter(p => p.isMain === true)[0];
+          this.currentMain.isMain = false;
+          photo.isMain = true;
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoURL = photo.url;
+          localStorage.setItem(
+            "user",
+            JSON.stringify(this.authService.currentUser)
+          );
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
+  }
+
+  deletePhoto(id: number) {
+    this.alertify.confirm("Are you sure you want to delete this photo?", () => {
+      this.userService
+        .deletePhoto(this.authService.decodedToken.nameid, id)
+        .subscribe(
+          () => {
+            this.photos.splice(
+              this.photos.findIndex(p => p.id === id),
+              1
+            );
+            this.alertify.success("Photo has been deleted");
+          },
+          error => {
+            this.alertify.error("Failed to delete the photo");
+          }
+        );
     });
   }
-  //this.uploader.response.subscribe(res => (this.response = res));
+  // this.uploader.response.subscribe(res => (this.response = res));
 }
