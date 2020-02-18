@@ -14,10 +14,12 @@ import { HttpClientModule } from "@angular/common/http";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TabsModule } from "ngx-bootstrap";
+import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
+import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
 import { NavComponent } from "./nav/nav.component";
-import { FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from "./services/auth.service";
 import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./register/register.component";
@@ -50,7 +52,9 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     TabsModule.forRoot(),
