@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TabsModule } from "ngx-bootstrap";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { FormsModule } from "@angular/forms";
+import { MomentModule } from 'ngx-moment';
 
 import { AppComponent } from "./app.component";
 import { NavComponent } from "./nav/nav.component";
@@ -46,12 +47,13 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditorComponent
-  ],
+    PhotoEditorComponent,
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    MomentModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),

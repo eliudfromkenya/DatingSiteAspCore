@@ -40,6 +40,7 @@ namespace DatingApp.Api {
       services.AddDbContext<DataContext> (x => x.UseSqlite (@"Filename=DatingAppDb.db"));
       services.AddControllers ();
       services.AddCors ();
+      services.AddScoped<LogUserActivity>();
       services.Configure<CloudinarySettings> (Configuration.GetSection ("CloudinarySettings"));  
       services.AddAutoMapper (typeof (AutoMapperProfiles));
       services.AddTransient<Seed> ();
