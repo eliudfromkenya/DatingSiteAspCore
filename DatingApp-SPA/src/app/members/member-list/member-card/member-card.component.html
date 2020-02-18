@@ -1,7 +1,7 @@
 <div class="card mb-4">
   <div class="card-img-wrapper">
     <img
-      src="{{ user.photoURL }}"
+      src="{{ user.photoURL || '../../../../../../assets/user.png' }}"
       alt="Photo for {{ user.photoURL }}"
       class="card-img-top"
     />
