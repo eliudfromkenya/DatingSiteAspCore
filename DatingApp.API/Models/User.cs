@@ -1,59 +1,27 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
-namespace DatingApp.API.Models {
-  [Table ("tbl_system_users")]
-  public class User {
-    private int id;
-
-    [Column ("user_id")]
-    [Key]
-    public int Id { get => id; set => id = value; }
-
-    [Column ("username")]
-    public string Username { get; set; }
-
-    [Column ("password_hash")]
-    public byte[] PasswordHash { get; set; }
-
-    [Column ("password_salt")]
-    public byte[] PasswordSalt { get; set; }
-
-    [Column ("gender")]
-    public string Gender { get; set; }
-
-    [Column ("birth_date")]
-    public DateTime DateOfBirth { get; set; }
-
-    [Column ("known_as")]
-    public string KnownAs { get; set; }
-
-    [Column ("date_created")]
-    public DateTime Created { get; set; }
-
-    [Column ("when_last_active")]
-    public DateTime LastActive { get; set; }
-
-    [Column ("introduction")]
-    public string Introduction { get; set; }
-
-    [Column ("looking_for")]
-    public string LookingFor { get; set; }
-
-    [Column ("interests")]
-    public string Interests { get; set; }
-
-    [Column ("city")]
-    public string City { get; set; }
-
-    [Column ("country")]
-    public string Country { get; set; }
-    public ICollection<Photo> Photos { get; set; }
-    public ICollection<Like> Likers { get; set; }
-    public ICollection<Like> Likees { get; set; }
-    public ICollection<Message> MessagesSent { get; set; }
-    public ICollection<Message> MessagesReceived { get; set; }
-  }
+namespace DatingApp.API.Models
+{
+    public class User : IdentityUser<int>
+    {
+        public string Gender { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string KnownAs { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime LastActive { get; set; }
+        public string Introduction { get; set; }
+        public string LookingFor { get; set; }
+        public string Interests { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Like> Likers { get; set; }
+        public virtual ICollection<Like> Likees { get; set; }
+        public virtual ICollection<Message> MessagesSent { get; set; }
+        public virtual ICollection<Message> MessagesReceived { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
+    }
 }

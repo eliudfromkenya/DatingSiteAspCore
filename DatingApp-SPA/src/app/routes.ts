@@ -11,12 +11,12 @@ import { MemberListResolver } from "./resolvers/member-list.resolver";
 import { MemberEditResolver } from "./resolvers/member-edit.resolver";
 import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-guard";
 import { ListsResolver } from "./resolvers/list.resolver";
-import { MessagesResolver } from './resolvers/messages.resolver';
+import { MessagesResolver } from "./resolvers/messages.resolver";
 export const appRoutes: Routes = [
-  {
-    path: "",
-    component: HomeComponent
-  },
+  // {
+  //   path: "",
+  //   component: HomeComponent
+  // },
   {
     path: "members",
     component: MemberListComponent,
