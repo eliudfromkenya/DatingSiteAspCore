@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DatingApp.Api.Data;
+using DatingApp.API.Data;
+using DatingApp.API.Contracts;
 using DatingApp.API.Models;
 using Newtonsoft.Json;
 
@@ -15,7 +16,7 @@ namespace DatingApp.API.Data
       _context = context;
     }
     
-    public void SeedUsers()
+     public void SeedUsers()
     {
       try
       {
@@ -42,7 +43,33 @@ namespace DatingApp.API.Data
       }
     }
 
-    private void CreateHashedPassword(string v, out byte[] hashed, out byte[] salt)
+
+ public static void SeedUsers(IRepository repo)
+    {
+      try
+      {
+        var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+        var users = JsonConvert.DeserializeObject<List<User>>(userData);
+
+        foreach (var user in users)
+        {          
+          byte[] hashed, salt;
+          CreateHashedPassword("password", out hashed, out salt);
+
+          user.Username = user.Username.ToLower();
+          user.PasswordSalt = salt;
+          user.PasswordHash = hashed;
+          repo.Add(user);
+        }
+       repo.SaveAll();
+        Console.Write(repo.GetUsers(null).Result.TotalCount.ToString());
+      }
+      catch (System.Exception ex)
+      {
+        Console.Write(ex);
+      }
+    }
+    private static void CreateHashedPassword(string v, out byte[] hashed, out byte[] salt)
     {
       using (var hmac = new System.Security.Cryptography.HMACSHA512())
       {

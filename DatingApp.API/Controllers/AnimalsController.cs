@@ -1,5 +1,5 @@
-﻿using DatingApp.Api.Data;
-using DatingApp.Api.Models;
+﻿
+using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using DatingApp.API.Repositories;
+using Microsoft.Extensions.DependencyInjection;
+using DatingApp.API.Contracts;
+using DatingApp.API.Data;
 
 //using ResponseFormattingSample.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace DatingApp.Api.Controllers
+namespace DatingApp.API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
@@ -30,11 +34,12 @@ namespace DatingApp.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Get()
         {
-    //   _context.Animals.Add(new Animal { Id = 1, Name = "Simba", DateOfBirth = DateTime.Now });
-    //    _context.Animals.Add(new Animal { Id = 4, Name = "Tobii", DateOfBirth = DateTime.Now });
-    //     _context.Animals.Add(new Animal { Id = 5, Name = "Maxii", DateOfBirth = DateTime.Now });
-    //      _context.Animals.Add(new Animal { Id = 41, Name = "Swara", DateOfBirth = DateTime.Now });
-    //   _context.SaveChanges();
+      _context.Animals.Add(new Animal { Id = 1, Name = "Simba", DateOfBirth = DateTime.Now });
+       _context.Animals.Add(new Animal { Id = 4, Name = "Tobii", DateOfBirth = DateTime.Now });
+        _context.Animals.Add(new Animal { Id = 5, Name = "Maxii", DateOfBirth = DateTime.Now });
+         _context.Animals.Add(new Animal { Id = 41, Name = "Swara", DateOfBirth = DateTime.Now });         
+      
+      _context.SaveChanges();
 
       var ans = await _context.Animals.ToListAsync();            
             return Ok(ans);

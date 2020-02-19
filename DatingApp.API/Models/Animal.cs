@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DatingApp.Api.Models
+namespace DatingApp.API.Models
 {
     [Table("tbl_animals")]
     public class Animal

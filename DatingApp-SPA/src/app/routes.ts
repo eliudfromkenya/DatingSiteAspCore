@@ -5,11 +5,13 @@ import { MessagesComponent } from "./messages/messages.component";
 import { HomeComponent } from "./home/home.component";
 import { Routes } from "@angular/router";
 import { MemberListComponent } from "./members/member-list/member-list.component";
-import { ListComponent } from "./list/list.component";
+import { ListsComponent } from "./list/list.component";
 import { MemberDetailResolver } from "./resolvers/member-details.resolver";
 import { MemberListResolver } from "./resolvers/member-list.resolver";
 import { MemberEditResolver } from "./resolvers/member-edit.resolver";
 import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-guard";
+import { ListsResolver } from "./resolvers/list.resolver";
+import { MessagesResolver } from './resolvers/messages.resolver';
 export const appRoutes: Routes = [
   {
     path: "",
@@ -28,7 +30,8 @@ export const appRoutes: Routes = [
     children: [
       {
         path: "messages",
-        component: MessagesComponent
+        component: MessagesComponent,
+        resolve: { user: MessagesResolver }
       },
       {
         path: "member/edit",
@@ -43,7 +46,8 @@ export const appRoutes: Routes = [
       },
       {
         path: "lists",
-        component: ListComponent
+        component: ListsComponent,
+        resolve: { user: ListsResolver }
       }
     ]
   },

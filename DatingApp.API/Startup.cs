@@ -6,10 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 //using AutoMapper;
-using DatingApp.Api.Data;
-using DatingApp.Api.Models;
-using DatingApp.API.Contracts;
 using DatingApp.API.Data;
+using DatingApp.API.Models;
+using DatingApp.API.Contracts;
 using DatingApp.API.Helpers;
 using DatingApp.API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,21 +26,21 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DatingApp.Api {
+namespace DatingApp.API {
   public class Startup {
     public Startup (IConfiguration configuration) {
       Configuration = configuration;
     }
 
     public IConfiguration Configuration { get; }
-
+    
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices (IServiceCollection services) {
       services.AddDbContext<DataContext> (x => x.UseSqlite (@"Filename=DatingAppDb.db"));
       services.AddControllers ();
       services.AddCors ();
-      services.AddScoped<LogUserActivity>();
-      services.Configure<CloudinarySettings> (Configuration.GetSection ("CloudinarySettings"));  
+      services.AddScoped<LogUserActivity> ();
+      services.Configure<CloudinarySettings> (Configuration.GetSection ("CloudinarySettings"));
       services.AddAutoMapper (typeof (AutoMapperProfiles));
       services.AddTransient<Seed> ();
       services.AddScoped<IAuthRepository, AuthRepository> ();
@@ -59,6 +58,8 @@ namespace DatingApp.Api {
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure (IApplicationBuilder app, IWebHostEnvironment env, Seed seeder) {
+      
+      
       if (env.IsDevelopment ()) {
         app.UseDeveloperExceptionPage ();
       } else {
@@ -73,14 +74,12 @@ namespace DatingApp.Api {
           });
         });
       }
-      // try
-      // {
-      //   Console.WriteLine("writing");
-      //   seeder.SeedUsers();
-      //   Console.WriteLine("writing out");
-      // }
-      // catch (System.Exception)
-      // { }
+      // try {
+      //   Console.WriteLine ("writing");
+      //   seeder.SeedUsers ();
+      //   Console.WriteLine ("writing out");
+      // } catch (System.Exception) { }
+
       app.UseCors (x => x.AllowAnyOrigin ().AllowAnyMethod ().AllowAnyHeader ());
       app.UseAuthentication ();
       app.UseHttpsRedirection ();

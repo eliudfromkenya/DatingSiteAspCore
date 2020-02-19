@@ -6,11 +6,10 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DatingApp.Api.Data;
-using DatingApp.Api.Models;
+using DatingApp.API.Data;
+using DatingApp.API.Models;
 using DatingApp.API.Contracts;
 using DatingApp.API.Dtos;
-using DatingApp.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace DatingApp.Api.Controllers {
+namespace DatingApp.API.Controllers {
   [Route ("api/[controller]")]
   [ApiController]
   public class AuthController : ControllerBase {
@@ -50,6 +49,7 @@ namespace DatingApp.Api.Controllers {
 
     [HttpPost ("login")]
     public async Task<IActionResult> Login (UserForLoginDto userForLoginDto) {
+         
       if (userForLoginDto == null)
         return BadRequest ("Null request parmeters");
 

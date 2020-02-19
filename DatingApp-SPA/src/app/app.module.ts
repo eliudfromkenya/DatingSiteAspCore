@@ -1,3 +1,4 @@
+import { MemberMessagesComponent } from './members/member-list/member-messages/member-messages.component';
 import { FileUploadModule } from "ng2-file-upload";
 import { PhotoEditorComponent } from "./members/member-list/photo-editor/photo-editor.component";
 import { MemberEditComponent } from "./members/member-list/member-edit/member-edit.component";
@@ -13,7 +14,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { TabsModule } from "ngx-bootstrap";
+import { TabsModule, PaginationModule, ButtonsModule } from "ngx-bootstrap";
 import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
 import { FormsModule } from "@angular/forms";
 import { MomentModule } from 'ngx-moment';
@@ -26,7 +27,7 @@ import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./register/register.component";
 import { AlertifyService } from "./services/alertify.service";
 import { MemberListComponent } from "./members/member-list/member-list.component";
-import { ListComponent } from "./list/list.component";
+import { ListsComponent } from "./list/list.component";
 import { MessagesComponent } from "./messages/messages.component";
 import { RouterModule } from "@angular/router";
 import { appRoutes } from "./routes";
@@ -34,6 +35,8 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { MemberDetailResolver } from "./resolvers/member-details.resolver";
 import { MemberEditResolver } from "./resolvers/member-edit.resolver";
 import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-guard";
+import { ListsResolver } from './resolvers/list.resolver';
+import { MessagesResolver } from './resolvers/messages.resolver';
 
 @NgModule({
   declarations: [
@@ -42,18 +45,21 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     HomeComponent,
     RegisterComponent,
     MemberListComponent,
-    ListComponent,
+    ListsComponent,
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    MemberMessagesComponent
    ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    PaginationModule.forRoot(),
     MomentModule,
+    ButtonsModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
@@ -81,7 +87,9 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
+    ListsResolver,
+    MessagesResolver
   ],
   bootstrap: [AppComponent]
 })

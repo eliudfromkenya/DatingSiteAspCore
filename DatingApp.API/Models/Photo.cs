@@ -18,7 +18,7 @@ namespace DatingApp.API.Models {
         [Column ("date_added")]
         public DateTime DateAdded { get; set; }
 
-        [Column ("cloudinary_public_id")]
+        [Column ("public_cloudinary_id")]
         public string PublicId { get; set; }
 
         [Column ("is_profile_main_photo")]
