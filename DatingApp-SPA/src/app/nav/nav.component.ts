@@ -1,12 +1,13 @@
-import { AlertifyService } from "./../services/alertify.service";
-import { AuthService } from "./../services/auth.service";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { UserService } from './../services/user.service';
+import { AlertifyService } from './../services/alertify.service';
+import { AuthService } from './../services/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-nav",
-  templateUrl: "./nav.component.html",
-  styleUrls: ["./nav.component.css"]
+  selector: 'app-nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
   model: any = {};
@@ -15,6 +16,7 @@ export class NavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private alertifyService: AlertifyService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -26,9 +28,9 @@ export class NavComponent implements OnInit {
 
   login() {
     this.authService.login(this.model).subscribe(
-      next => this.alertifyService.success("Successifully logged in"),
+      next => this.alertifyService.success('Successifully logged in'),
       err => this.alertifyService.error(err),
-      () => this.router.navigate(["/members"])
+      () => this.router.navigate(['/members'])
     );
   }
 
@@ -38,9 +40,10 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.alertifyService.error("Successifully logged out");
-    if (this.authService.loggedIn())
+    this.alertifyService.error('Successifully logged out');
+    if (this.authService.loggedIn()) {
       this.alertifyService.error("Still logged in");
-    this.router.navigate(["/home"]);
+    }
+    this.router.navigate(['/home']);
   }
 }

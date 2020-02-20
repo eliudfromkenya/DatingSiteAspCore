@@ -49,7 +49,7 @@ namespace DatingApp.API.Repositories
 
         public async Task<User> GetUser(int id, bool isCurrentUser)
         {
-            var query = _context.Users.AsQueryable();
+            var query = _context.Users.Include(x => x.Photos).AsQueryable();
 
             if (isCurrentUser)
                 query = query.IgnoreQueryFilters();
@@ -61,7 +61,7 @@ namespace DatingApp.API.Repositories
 
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
-            var users = _context.Users.OrderByDescending(u => u.LastActive).AsQueryable();
+            var users = _context.Users.Include(x => x.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
 
             users = users.Where(u => u.Id != userParams.UserId);
 
@@ -105,14 +105,14 @@ namespace DatingApp.API.Repositories
 
         private async Task<IEnumerable<int>> GetUserLikes(int id, bool likers)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-
             if (likers)
             {
+                var user = await _context.Users.Include(x => x.Likers).FirstOrDefaultAsync(u => u.Id == id);
                 return user.Likers.Where(u => u.LikeeId == id).Select(i => i.LikerId);
             }
             else
             {
+                var user = await _context.Users.Include(x => x.Likees).FirstOrDefaultAsync(u => u.Id == id);
                 return user.Likees.Where(u => u.LikerId == id).Select(i => i.LikeeId);
             }
         }

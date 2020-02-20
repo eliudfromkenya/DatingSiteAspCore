@@ -46,6 +46,14 @@ export class MemberEditComponent implements OnInit {
       );
     console.log(this.user);
   }
+  
+  sendLike(id: number) {
+    this.userService.sendLike(this.authService.decodedToken.nameid, id).subscribe(data => {
+      this.alertify.success('You have liked: ' + this.user.knownAs);
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 
   updateMainPhoto(photoUrl) {
     this.user.photoUrl = photoUrl;

@@ -14,7 +14,7 @@
     <div class="col-sm-4">
       <div class="card">
         <img
-          src="{{ photoUrl || '../../../../../../assets/user.png' }}"
+          src="{{ user?.photoUrl || '../../../../../../assets/user.png' }}"
           alt="{{ user?.knownAs }}"
           class="card-img-top img-thumbnail"
         />
@@ -45,7 +45,7 @@
               [disabled]="!editForm.dirty"
               class="btn btn-success btn-block"
             >
-              Save Changed
+              Save Changes
             </button>
           </div>
         </div>

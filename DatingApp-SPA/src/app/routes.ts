@@ -13,10 +13,10 @@ import { PreventUnsavedChanges } from "./RouteGuards/prevent-unsaved-changes-gua
 import { ListsResolver } from "./resolvers/list.resolver";
 import { MessagesResolver } from "./resolvers/messages.resolver";
 export const appRoutes: Routes = [
-  // {
-  //   path: "",
-  //   component: HomeComponent
-  // },
+  {
+    path: "",
+    component: HomeComponent
+  },
   {
     path: "members",
     component: MemberListComponent,
@@ -53,7 +53,7 @@ export const appRoutes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "home",
+    redirectTo: "",
     pathMatch: "full"
   }
 ];
