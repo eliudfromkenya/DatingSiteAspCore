@@ -1,4 +1,7 @@
-<div class="container mt-5">
+<div>
+  <app-member-list *ngIf="alreadyMember"></app-member-list>
+</div>
+<div *ngIf="!alreadyMember" class="container mt-5">
   <div *ngIf="!inRegisterMode" style="text-align: center">
     <h1>Find your match</h1>
     <p class="lead">
@@ -20,6 +23,3 @@
     </div>
   </div>
 </div>
-<P *ngFor="let animal of animals">
-  {{ animal.name }}
-</P>
